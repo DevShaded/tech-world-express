@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    public function up()
+    public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('product_information', function (Blueprint $table) {
+        Schema::create('product_informations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->references('id')->on('products');
             $table->string('description')->nullable();
@@ -31,13 +31,13 @@ return new class extends Migration {
 
         Schema::create('product_information_pictures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_information_id')->constrained('product_information');
+            $table->foreignId('product_information_id')->constrained('product_informations');
             $table->string('image');
             $table->timestamps();
         });
 
-        Schema::create('product_information', function (Blueprint $table) {
-            $table->foreignId('product_information_picture_id')->references('id')->on('product_information_pictures')->cascadeOnDelete();
+        Schema::table('product_informations', function (Blueprint $table) {
+            $table->foreign('product_information_picture_id')->references('id')->on('product_information_pictures')->cascadeOnDelete();
         });
 
         Schema::create('product_specifications', function (Blueprint $table) {
@@ -49,7 +49,7 @@ return new class extends Migration {
         });
 
         Schema::table('products', function (Blueprint $table) {
-            $table->foreign('information_id')->references('id')->on('product_information')->cascadeOnDelete();
+            $table->foreign('information_id')->references('id')->on('product_informations')->cascadeOnDelete();
             $table->foreign('specification_id')->references('id')->on('product_specifications')->cascadeOnDelete();
         });
 
@@ -71,9 +71,13 @@ return new class extends Migration {
             $table->string('status');
             $table->timestamps();
         });
+
+        Schema::table('user_order_items', function (Blueprint $table) {
+            $table->foreign('product_id')->references('id')->on('products');
+        });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('products');
     }
