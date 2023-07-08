@@ -23,7 +23,7 @@ return new class extends Migration
 
         Schema::create('user_information', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
@@ -34,17 +34,17 @@ return new class extends Migration
 
         Schema::create('user_billing', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->bigInteger('card_number')->nullable();
             $table->string('card_name')->nullable();
-            $table->string('card_expiry')->nullable();
-            $table->string('card_cvv')->nullable();
+            $table->dateTime('card_expiry')->nullable();
+            $table->integer('card_cvv')->nullable();
             $table->timestamps();
         });
 
         Schema::create('user_shipping', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->string('shipping_address')->nullable();
             $table->string('shipping_city')->nullable();
             $table->string('shipping_state_province')->nullable();
@@ -54,7 +54,7 @@ return new class extends Migration
 
         Schema::create('user_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->string('order_date');
             $table->decimal('total_amount');
             $table->string('status');
@@ -63,7 +63,7 @@ return new class extends Migration
 
         Schema::create('user_order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_order_id')->constrained('user_orders')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_order_id')->references('id')->on('user_orders');
             $table->foreignId('product_id')->nullable();
             $table->string('product_sku');
             $table->string('product_name');
