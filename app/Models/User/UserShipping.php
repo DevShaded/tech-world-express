@@ -3,11 +3,14 @@
 namespace App\Models\User;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class UserShipping extends Model
 {
-protected $table = 'user_shipping';
+    use HasFactory;
+
+    protected $table = 'user_shipping';
 
     protected $fillable = [
         'user_id',

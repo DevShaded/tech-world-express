@@ -35,7 +35,7 @@ return new class extends Migration
         Schema::create('user_billing', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('card_number')->nullable();
+            $table->bigInteger('card_number')->nullable();
             $table->string('card_name')->nullable();
             $table->string('card_expiry')->nullable();
             $table->string('card_cvv')->nullable();

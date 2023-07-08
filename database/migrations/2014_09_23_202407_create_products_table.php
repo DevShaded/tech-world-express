@@ -42,7 +42,7 @@ return new class extends Migration {
 
         Schema::create('product_specifications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('product_id')->references('id')->on('products');
             $table->string('name');
             $table->string('value');
             $table->timestamps();
@@ -55,10 +55,9 @@ return new class extends Migration {
 
         Schema::create('product_faqs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained('products');
-            $table->string('order_date');
-            $table->decimal('total_amount');
-            $table->string('status');
+            $table->foreignId('product_id')->references('id')->on('products');
+            $table->text('question');
+            $table->text('answer');
             $table->timestamps();
         });
 
@@ -66,9 +65,8 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('product_id')->constrained('products');
             $table->foreignId('user_id')->constrained('users');
-            $table->string('order_date');
-            $table->decimal('total_amount');
-            $table->string('status');
+            $table->text('content');
+            $table->integer('rating');
             $table->timestamps();
         });
 
@@ -80,5 +78,10 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::dropIfExists('products');
+        Schema::dropIfExists('product_informations');
+        Schema::dropIfExists('product_information_pictures');
+        Schema::dropIfExists('product_specifications');
+        Schema::dropIfExists('product_faqs');
+        Schema::dropIfExists('product_reviews');
     }
 };
