@@ -14,10 +14,12 @@ class ProductFactory extends Factory
 
     public function definition(): array
     {
+        $name = $this->faker->words(2, true);
+
         return [
-            'sku' => $this->faker->word(),
-            'name' => $this->faker->name(),
-            'slug' => $this->faker->slug(),
+            'sku' => $this->faker->ean8(),
+            'name' => $name,
+            'slug' => \Str::slug($name),
             'information_id' => null,
             'specification_id' => null,
             'created_at' => Carbon::now(),

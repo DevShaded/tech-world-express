@@ -7,12 +7,32 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    public array $categories = [
+        "laptops",
+        "smartphones",
+        "tablets",
+        "gaming",
+        "audio",
+        "cameras",
+        "tvs",
+        "wearables",
+        "accessories",
+        "networking",
+    ];
+
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        \App\Models\Category\Category::factory(10)->create();
+        $categories = resolve(\Database\Seeders\DatabaseSeeder::class)->categories;
+
+        foreach ($categories as $category) {
+            \App\Models\Category\Category::create([
+                'name' => $category,
+            ]);
+        }
+
         $users = \App\Models\User::factory(10)->create();
         $products = \App\Models\Product\Product::factory(10)->create();
 
@@ -44,8 +64,12 @@ class DatabaseSeeder extends Seeder
         }
 
         foreach ($products as $product) {
+            // get all categories from database
+            $categories = \App\Models\Category\Category::all();
+
             $productInfo = \App\Models\Product\Information\ProductInformation::factory()->create([
-                'product_id' => $product['id']
+                'product_id' => $product['id'],
+                'category_id' => $categories->random()->id,
             ]);
 
             $productInfoPicture = \App\Models\Product\Information\ProductInformationPicture::factory()->create([

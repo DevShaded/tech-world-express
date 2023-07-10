@@ -14,7 +14,7 @@ class ProductInformationPictureFactory extends Factory
     public function definition(): array
     {
         return [
-            'image' => $this->faker->imageUrl(),
+            'image' => 'https://picsum.photos/seed/' . $this->faker->word . '/200/300',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
