@@ -2,6 +2,7 @@
 import DefaultLayout from "@/Layouts/DefaultLayout.vue";
 import RandomProducts from "@/Components/RandomProducts.vue";
 import { Product } from "@/types/ProductType";
+import { Link } from "@inertiajs/vue3";
 
 defineProps<{
     data: {
@@ -37,11 +38,11 @@ defineProps<{
                                     Delivery!
                                 </p>
                                 <div class="mt-6">
-                                    <a
+                                    <Link
                                         class="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 font-medium text-white hover:bg-indigo-700"
                                         href="#"
-                                        >Shop now!</a
-                                    >
+                                        >Shop now!
+                                    </Link>
                                 </div>
                             </div>
                         </div>
