@@ -14,6 +14,7 @@ import {
 import { computed, ComputedRef, ref } from "vue";
 import { Link, usePage } from "@inertiajs/vue3";
 import FooterComponent from "@/Components/FooterComponent.vue";
+import { User } from "@/types";
 
 interface CategoriesEntity {
     id: number;
@@ -21,6 +22,10 @@ interface CategoriesEntity {
     created_at: string;
     updated_at: string;
 }
+
+const user: ComputedRef<User> = computed((): User => {
+    return usePage().props.auth.user;
+});
 
 const categories: ComputedRef<CategoriesEntity[] | null | unknown> = computed(
     (): CategoriesEntity[] | null | unknown => {
@@ -116,8 +121,13 @@ const mobileMenuOpen = ref(false);
                                                     >
                                                         <li class="flex">
                                                             <Link
+                                                                :href="
+                                                                    route(
+                                                                        'categories.show',
+                                                                        category.name,
+                                                                    )
+                                                                "
                                                                 class="text-gray-500"
-                                                                href="#"
                                                             >
                                                                 {{
                                                                     capitalize(
@@ -152,6 +162,7 @@ const mobileMenuOpen = ref(false);
                             </div>
 
                             <div
+                                v-if="!user"
                                 class="space-y-6 border-t border-gray-200 px-4 py-6"
                             >
                                 <div class="flow-root">
@@ -170,6 +181,30 @@ const mobileMenuOpen = ref(false);
                                     </Link>
                                 </div>
                             </div>
+
+                            <div
+                                v-else
+                                class="space-y-6 border-t border-gray-200 px-4 py-6"
+                            >
+                                <div class="flow-root">
+                                    <Link
+                                        :href="route('dashboard')"
+                                        class="-m-2 block p-2 font-medium text-gray-900"
+                                    >
+                                        Dashboard
+                                    </Link>
+                                </div>
+                                <div class="flow-root">
+                                    <Link
+                                        :href="route('logout')"
+                                        as="button"
+                                        class="-m-2 block p-2 font-medium text-gray-900"
+                                        method="post"
+                                        type="button"
+                                        >Sign out
+                                    </Link>
+                                </div>
+                            </div>
                         </DialogPanel>
                     </TransitionChild>
                 </div>
@@ -179,7 +214,7 @@ const mobileMenuOpen = ref(false);
         <header class="relative z-10">
             <nav aria-label="Top">
                 <!-- Top navigation -->
-                <div class="bg-gray-900">
+                <div v-if="!user" class="bg-gray-900">
                     <div
                         class="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
                     >
@@ -200,6 +235,35 @@ const mobileMenuOpen = ref(false);
                                 :href="route('login')"
                                 class="text-sm font-medium text-white hover:text-gray-100"
                                 >Sign in
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-else class="bg-gray-900">
+                    <div
+                        class="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
+                    >
+                        <div
+                            class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6"
+                        >
+                            <Link
+                                :href="route('dashboard')"
+                                class="text-sm font-medium text-white hover:text-gray-100"
+                            >
+                                Dashboard
+                            </Link>
+                            <span
+                                aria-hidden="true"
+                                class="h-6 w-px bg-gray-600"
+                            />
+                            <Link
+                                :href="route('logout')"
+                                as="button"
+                                class="text-sm font-medium text-white hover:text-gray-100"
+                                method="post"
+                                type="button"
+                                >Sign out
                             </Link>
                         </div>
                     </div>
@@ -240,8 +304,16 @@ const mobileMenuOpen = ref(false);
                                             >
                                                 <div class="relative flex">
                                                     <Link
+                                                        :href="
+                                                            route(
+                                                                'categories.show',
+                                                                {
+                                                                    category:
+                                                                        category.name,
+                                                                },
+                                                            )
+                                                        "
                                                         class="border-transparent text-gray-700 hover:text-gray-800 relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out"
-                                                        href="#"
                                                     >
                                                         {{
                                                             capitalize(
@@ -289,8 +361,12 @@ const mobileMenuOpen = ref(false);
                                         <div class="flex space-x-8">
                                             <div class="flex">
                                                 <Link
+                                                    :href="
+                                                        !user
+                                                            ? route('login')
+                                                            : route('dashboard')
+                                                    "
                                                     class="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                                                    href="#"
                                                 >
                                                     <span class="sr-only"
                                                         >Account</span
