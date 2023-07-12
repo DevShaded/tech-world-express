@@ -6,7 +6,9 @@ import { Link } from "@inertiajs/vue3";
 
 defineProps<{
     data: {
-        products: Product[];
+        products: {
+            data: Product[];
+        };
     };
 }>();
 </script>
@@ -61,6 +63,6 @@ defineProps<{
         </div>
 
         <!-- Random products -->
-        <RandomProducts :products="data.products" />
+        <RandomProducts :products="data.products.data" />
     </DefaultLayout>
 </template>

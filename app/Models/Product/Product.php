@@ -7,6 +7,7 @@ use App\Models\User\UserOrderItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
@@ -20,17 +21,17 @@ class Product extends Model
         'specification_id',
     ];
 
-    public function userOrderItem(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function userOrderItem(): HasMany
     {
         return $this->hasMany(UserOrderItem::class);
     }
 
-    public function information(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function information(): HasOne
     {
         return $this->hasOne(ProductInformation::class);
     }
 
-    public function specification(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function specification(): HasOne
     {
         return $this->hasOne(ProductSpecification::class);
     }
