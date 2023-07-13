@@ -29,7 +29,7 @@ const user: ComputedRef<User> = computed((): User => {
 
 const categories: ComputedRef<CategoriesEntity[] | null | unknown> = computed(
     (): CategoriesEntity[] | null | unknown => {
-        return usePage().props.categories;
+        return usePage().props.categories.data;
     },
 );
 
