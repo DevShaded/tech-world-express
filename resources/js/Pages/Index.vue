@@ -72,8 +72,8 @@ const incentives = [
                                 </p>
                                 <div class="mt-6">
                                     <Link
+                                        :href="route('categories.index')"
                                         class="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 font-medium text-white hover:bg-indigo-700"
-                                        href="#"
                                         >Shop now!
                                     </Link>
                                 </div>
@@ -157,8 +157,8 @@ const incentives = [
                                 have a really nice desk setup.
                             </p>
                             <Link
+                                :href="route('categories.index')"
                                 class="mt-8 block w-full rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto"
-                                href="#"
                                 >Shop Workspace!
                             </Link>
                         </div>

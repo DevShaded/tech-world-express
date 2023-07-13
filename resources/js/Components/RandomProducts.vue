@@ -18,8 +18,8 @@ defineProps<{
                     Some Random products for you!
                 </h2>
                 <Link
+                    :href="route('categories.index')"
                     class="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block"
-                    href="#"
                 >
                     See everything
                     <span aria-hidden="true"> &rarr;</span>
@@ -72,8 +72,8 @@ defineProps<{
 
             <div class="mt-12 px-4 sm:hidden">
                 <Link
+                    :href="route('categories.index')"
                     class="text-sm font-semibold text-indigo-600 hover:text-indigo-500"
-                    href="#"
                 >
                     See everything
                     <span aria-hidden="true"> &rarr;</span>
