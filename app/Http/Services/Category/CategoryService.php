@@ -20,7 +20,7 @@ class CategoryService
         return CategoryResource::collection($categories);
     }
 
-    public static function getCategoryWithProjects(string $name): AnonymousResourceCollection
+    public static function getCategoryWithProducts(string $name): AnonymousResourceCollection
     {
         $products = Cache::remember('products:' . $name, 3600, function () use ($name) {
             return Product::whereHas('information.category', function ($query) use ($name) {
