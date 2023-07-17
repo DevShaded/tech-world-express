@@ -8,8 +8,10 @@ export interface Product {
     created_at: string;
     updated_at: string;
     information: Information;
+    specification: Specification;
+    faqs?: FaqsEntity[] | null;
+    reviews?: ReviewsEntity[] | null;
 }
-
 export interface Information {
     id: number;
     product_id: number;
@@ -21,8 +23,16 @@ export interface Information {
     category_id: number;
     created_at: string;
     updated_at: string;
-    category: Category;
     product_information_picture: ProductInformationPicture;
+    category: Category;
+}
+
+export interface ProductInformationPicture {
+    id: number;
+    product_information_id: number;
+    image: string;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface Category {
@@ -32,10 +42,40 @@ export interface Category {
     updated_at: string;
 }
 
-export interface ProductInformationPicture {
+export interface Specification {
     id: number;
-    product_information_id: number;
-    image: string;
+    product_id: number;
+    name: string;
+    value: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface FaqsEntity {
+    id: number;
+    product_id: number;
+    question: string;
+    answer: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface ReviewsEntity {
+    id: number;
+    product_id: number;
+    user_id: number;
+    content: string;
+    rating: number;
+    created_at: string;
+    updated_at: string;
+    user: User;
+}
+
+export interface User {
+    id: number;
+    name: string;
+    email: string;
+    email_verified_at: string;
     created_at: string;
     updated_at: string;
 }
