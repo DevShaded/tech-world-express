@@ -30,4 +30,9 @@ class CategoryService
 
         return ProductResource::collection($products);
     }
+
+    public static function getCategoryByName(string $name): Category
+    {
+        return Category::where('name', $name)->first();
+    }
 }

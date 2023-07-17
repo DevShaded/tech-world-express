@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\Category\CategoryService;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,8 +18,13 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function show(string $name): AnonymousResourceCollection
+    public function show(string $name): Response
     {
-        return CategoryService::getCategoryWithProjects($name);
+        return Inertia::render('Categories/Show', [
+            'data' => [
+                'products' => CategoryService::getCategoryWithProducts($name) ?? null,
+                'category' => CategoryService::getCategoryByName($name) ?? null,
+            ],
+        ]);
     }
 }
