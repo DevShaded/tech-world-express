@@ -13,26 +13,42 @@ class CategoryService
 {
     public static function getAllCategories(): AnonymousResourceCollection
     {
-        $categories = Cache::remember('categories', 3600, function () {
-            return Category::all();
-        });
+        $categories = Cache::get('categories');
+
+        if (!$categories) {
+            $categories = Category::all();
+
+            Cache::put('categories', $categories, 3600);
+        }
 
         return CategoryResource::collection($categories);
     }
 
     public static function getCategoryWithProducts(string $name): AnonymousResourceCollection
     {
-        $products = Cache::remember('products:' . $name, 3600, function () use ($name) {
-            return Product::whereHas('information.category', function ($query) use ($name) {
+        $products = Cache::get('products:' . $name);
+
+        if (!$products) {
+            $products = Product::whereHas('information.category', function ($query) use ($name) {
                 $query->where('name', $name);
             })->with('information', 'information.productInformationPicture')->get();
-        });
+
+            Cache::put('products:' . $name, $products, 3600);
+        }
 
         return ProductResource::collection($products);
     }
 
     public static function getCategoryByName(string $name): Category
     {
-        return Category::where('name', $name)->first();
+        $category = Cache::get('category:' . $name);
+
+        if (!$category) {
+            $category = Category::where('name', $name)->first();
+
+            Cache::put('category:' . $name, $category, 3600);
+        }
+
+        return $category;
     }
 }

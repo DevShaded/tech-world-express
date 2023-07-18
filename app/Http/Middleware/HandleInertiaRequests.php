@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use App\Http\Services\Category\CategoryService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 
@@ -32,10 +31,6 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $categories = Cache::remember('categories', 3600, function () {
-            return CategoryService::getAllCategories();
-        });
-
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user(),
@@ -45,7 +40,7 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
-            'categories' => $categories ?? null,
+            'categories' => CategoryService::getAllCategories() ?? null,
         ]);
     }
 }
