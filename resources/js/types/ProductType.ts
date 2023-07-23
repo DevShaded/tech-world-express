@@ -8,7 +8,7 @@ export interface Product {
     created_at: string;
     updated_at: string;
     information: Information;
-    specification: Specification;
+    specifications: Specification[];
     faqs?: FaqsEntity[] | null;
     reviews?: ReviewsEntity[] | null;
 }
