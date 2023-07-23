@@ -13,7 +13,6 @@ return new class extends Migration {
             $table->string('name');
             $table->string('slug');
             $table->foreignId('information_id')->nullable();
-            $table->foreignId('specification_id')->nullable();
             $table->timestamps();
         });
 
@@ -50,7 +49,6 @@ return new class extends Migration {
 
         Schema::table('products', function (Blueprint $table) {
             $table->foreign('information_id')->references('id')->on('product_informations')->cascadeOnDelete();
-            $table->foreign('specification_id')->references('id')->on('product_specifications')->cascadeOnDelete();
         });
 
         Schema::create('product_faqs', function (Blueprint $table) {

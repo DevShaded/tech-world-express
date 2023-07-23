@@ -31,9 +31,9 @@ class Product extends Model
         return $this->hasOne(ProductInformation::class);
     }
 
-    public function specification(): HasOne
+    public function specification(): HasMany
     {
-        return $this->hasOne(ProductSpecification::class);
+        return $this->hasMany(ProductSpecifications::class);
     }
 
     public function faqs(): HasMany
