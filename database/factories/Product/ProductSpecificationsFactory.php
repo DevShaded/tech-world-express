@@ -3,13 +3,13 @@
 namespace Database\Factories\Product;
 
 use App\Models\Product\Product;
-use App\Models\Product\ProductSpecification;
+use App\Models\Product\ProductSpecifications;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-class ProductSpecificationFactory extends Factory
+class ProductSpecificationsFactory extends Factory
 {
-    protected $model = ProductSpecification::class;
+    protected $model = ProductSpecifications::class;
 
     public function definition(): array
     {

@@ -28,6 +28,8 @@
         "@headlessui/vue": "^1.7.14",
         "@heroicons/vue": "^2.0.18",
         "@tailwindcss/aspect-ratio": "^0.4.2",
-        "@vue/eslint-config-prettier": "^7.1.0"
+        "@tinymce/tinymce-vue": "^5.1.0",
+        "@vue/eslint-config-prettier": "^7.1.0",
+        "laravel-precognition-vue-inertia": "^0.4.1"
     }
 }

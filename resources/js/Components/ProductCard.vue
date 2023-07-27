@@ -20,7 +20,14 @@ defineProps<{
     </div>
     <div class="flex flex-1 flex-col space-y-2 p-4">
         <h3 class="text-sm font-medium text-gray-900">
-            <Link href="#">
+            <Link
+                :href="
+                    route('product.show', {
+                        name: category.name,
+                        slug: product.slug,
+                    })
+                "
+            >
                 <span aria-hidden="true" class="absolute inset-0" />
                 {{ product.name }}
             </Link>

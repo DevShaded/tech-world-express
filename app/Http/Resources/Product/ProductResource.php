@@ -22,9 +22,14 @@ class ProductResource extends JsonResource
             'updated_at' => $this->updated_at,
 
             'information' => $this->whenLoaded('information'),
-            'specification' => $this->whenLoaded('specification'),
+            'category' => $this->whenLoaded('information.category'),
+            'specifications' => $this->whenLoaded('specification'),
             'faqs' => $this->whenLoaded('faqs'),
-            'reviews' => $this->whenLoaded('reviews'),
+
+            // get all reviews for this product recent first
+            'reviews' => $this->whenLoaded('reviews', function () {
+                return $this->reviews->sortByDesc('created_at');
+            }),
         ];
     }
 }

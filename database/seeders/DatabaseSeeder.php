@@ -46,8 +46,8 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        $users = User::factory(10)->create();
-        $products = Product::factory(10)->create();
+        $users = User::factory(50)->create();
+        $products = Product::factory(100)->create();
 
         foreach ($users as $user) {
             UserBilling::factory()->create([
@@ -93,7 +93,7 @@ class DatabaseSeeder extends Seeder
                 'product_information_picture_id' => $productInfoPicture->id,
             ]);
 
-            ProductSpecifications::factory(4)->create([
+            ProductSpecifications::factory(6)->create([
                 'product_id' => $product['id'],
             ]);
 

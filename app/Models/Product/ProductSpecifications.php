@@ -4,8 +4,9 @@ namespace App\Models\Product;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ProductSpecification extends Model
+class ProductSpecifications extends Model
 {
     use HasFactory;
 
@@ -16,7 +17,7 @@ class ProductSpecification extends Model
         'value',
     ];
 
-    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
