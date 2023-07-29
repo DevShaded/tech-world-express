@@ -14,9 +14,9 @@ class UserOrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'order_date' => $this->faker->word(),
+            'order_date' => $this->faker->dateTime('-1 year'),
             'total_amount' => $this->faker->randomFloat('2', '', '8'),
-            'status' => $this->faker->word(),
+            'status' => $this->faker->randomElement(['pending', 'processing', 'shipped', 'completed', 'cancelled']),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 

@@ -55,9 +55,9 @@ return new class extends Migration
         Schema::create('user_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->string('order_date');
+            $table->dateTime('order_date');
             $table->decimal('total_amount');
-            $table->string('status');
+            $table->enum('status', ['pending', 'processing', 'shipped', 'completed', 'cancelled'])->default('pending');
             $table->timestamps();
         });
 

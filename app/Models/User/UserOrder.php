@@ -2,9 +2,11 @@
 
 namespace App\Models\User;
 
+use App\Enums\User\UserOrderStatusEnum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserOrder extends Model
 {
@@ -20,7 +22,12 @@ class UserOrder extends Model
         'order_status',
     ];
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    protected $casts = [
+        'order_date' => 'datetime',
+        'status' => UserOrderStatusEnum::class,
+    ];
+
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
