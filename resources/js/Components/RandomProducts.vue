@@ -55,7 +55,15 @@ defineProps<{
                                     <h3
                                         class="mt-1 font-semibold text-gray-900"
                                     >
-                                        <Link href="#">
+                                        <Link
+                                            :href="
+                                                route('product.show', {
+                                                    name: product.information
+                                                        .category.name,
+                                                    slug: product.slug,
+                                                })
+                                            "
+                                        >
                                             <span class="absolute inset-0" />
                                             {{ product.name }}
                                         </Link>
