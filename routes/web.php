@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Checkout\CheckoutController;
+use App\Http\Controllers\Checkout\CheckoutSuccessController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Product\Cart\CartController;
 use App\Http\Controllers\Product\ProductController;
@@ -33,6 +35,15 @@ Route::post('/product/review', ReviewController::class)->name('product.review');
 Route::resource('/cart', CartController::class)
     ->except(['create', 'update', 'edit', 'show'])
     ->names(['cart.index', 'cart.store', 'cart.update', 'cart.destroy'])
+    ->middleware('auth');
+
+Route::resource('/checkout', CheckoutController::class)
+    ->except(['create', 'edit', 'update', 'show'])
+    ->names(['checkout.index', 'checkout.store', 'checkout.destroy'])
+    ->middleware('auth');
+
+Route::get('/checkout/success', CheckoutSuccessController::class)
+    ->name('checkout.success')
     ->middleware('auth');
 
 Route::get('/dashboard', function () {

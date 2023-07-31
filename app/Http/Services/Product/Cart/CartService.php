@@ -3,7 +3,9 @@
 namespace App\Http\Services\Product\Cart;
 
 use App\Models\Product\Product;
+use App\Models\User\Country\Country;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Cache;
 
 class CartService
 {
@@ -44,5 +46,22 @@ class CartService
         }
 
         Cart::remove($rowId);
+    }
+
+    public static function clearCart(): void
+    {
+        Cart::destroy();
+    }
+
+    public static function getCountries()
+    {
+        $countries = Cache::get('countries');
+
+        if (!$countries) {
+            $countries = Country::all();
+            Cache::put('countries', $countries, 3600);
+        }
+
+        return $countries;
     }
 }

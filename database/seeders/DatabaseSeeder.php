@@ -11,6 +11,7 @@ use App\Models\Product\ProductFaqs;
 use App\Models\Product\ProductReviews;
 use App\Models\Product\ProductSpecifications;
 use App\Models\User;
+use App\Models\User\Country\Country;
 use App\Models\User\UserBilling;
 use App\Models\User\UserInformation;
 use App\Models\User\UserOrder;
@@ -46,6 +47,8 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        $country = Country::factory(195)->create();
+
         $users = User::factory(50)->create();
         $products = Product::factory(100)->create();
 
@@ -56,6 +59,7 @@ class DatabaseSeeder extends Seeder
 
             UserInformation::factory()->create([
                 'user_id' => $user['id'],
+                'country_id' => $country->random()->id,
             ]);
 
             $userOrders = UserOrder::factory(10)->create([

@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('address2')->nullable();
             $table->string('city');
-            $table->string('country');
+            $table->foreignId('country_id')->nullable()->references('id')->on('countries');
             $table->string('state_province')->nullable();
             $table->string('zip_postal_code');
             $table->string('phone')->nullable();
@@ -42,8 +42,8 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->bigInteger('card_number')->nullable();
             $table->string('card_name')->nullable();
-            $table->dateTime('card_expiry')->nullable();
-            $table->integer('card_cvv')->nullable();
+            $table->string('card_expiry')->nullable();
+            $table->string('card_cvv')->nullable();
             $table->timestamps();
         });
 
