@@ -26,6 +26,7 @@ defineProps<{
             :highlights="product.information.highlights"
             :name="product.name"
             :price="product.information.price"
+            :slug="product.slug"
         />
 
         <div

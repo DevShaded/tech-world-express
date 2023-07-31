@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\Product\Cart\CartController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\ReviewController;
 use App\Http\Controllers\ProfileController;
@@ -28,6 +29,11 @@ Route::resource('categories', CategoryController::class)
 Route::get('/categories/{name}/product/{slug}', [ProductController::class, 'show'])->name('product.show');
 
 Route::post('/product/review', ReviewController::class)->name('product.review');
+
+Route::resource('/cart', CartController::class)
+    ->except(['create', 'update', 'edit', 'show'])
+    ->names(['cart.index', 'cart.store', 'cart.update', 'cart.destroy'])
+    ->middleware('auth');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

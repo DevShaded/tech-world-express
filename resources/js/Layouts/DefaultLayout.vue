@@ -33,6 +33,8 @@ const categories: ComputedRef<CategoriesEntity[] | null | unknown> = computed(
     },
 );
 
+const cart = computed(() => usePage().props.cart);
+
 // make first letter in category name uppercase
 const capitalize = (s: string): string => {
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -46,6 +48,10 @@ const navigation = {
 };
 
 const mobileMenuOpen = ref(false);
+
+const cartCount = computed(() => {
+    return usePage().props.cart.count as number;
+});
 </script>
 
 <template>
@@ -386,8 +392,12 @@ const mobileMenuOpen = ref(false);
 
                                         <div class="flow-root">
                                             <Link
+                                                :href="
+                                                    !user
+                                                        ? route('login')
+                                                        : route('cart.index')
+                                                "
                                                 class="group -m-2 flex items-center p-2"
-                                                href="#"
                                             >
                                                 <ShoppingCartIcon
                                                     aria-hidden="true"
@@ -395,7 +405,7 @@ const mobileMenuOpen = ref(false);
                                                 />
                                                 <span
                                                     class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800"
-                                                    >0</span
+                                                    >{{ cartCount }}</span
                                                 >
                                                 <span class="sr-only"
                                                     >items in cart, view

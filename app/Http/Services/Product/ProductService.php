@@ -38,5 +38,27 @@ class ProductService
 
         return ProductResource::collection($product);
     }
+
+    public static function getProductWithoutCollection(string $name, string $slug)
+    {
+        $product = Cache::get('cart:' . ':categories:' . $name . ':product:' . $slug);
+
+        if (!$product) {
+            $product = Product::whereHas('information.category', function ($query) use ($name) {
+                $query->where('name', $name);
+            })->where('slug', $slug)
+                ->with('information', 'information.productInformationPicture', 'information.category')
+                ->get();
+
+            // if product is not found return 404
+            if ($product->isEmpty()) {
+                abort(404);
+            }
+
+            Cache::put('cart:' . ':categories:' . $name . ':product:' . $slug, $product, 3600);
+        }
+
+        return $product;
+    }
 }
 
