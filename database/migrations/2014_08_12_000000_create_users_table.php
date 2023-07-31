@@ -24,11 +24,16 @@ return new class extends Migration
         Schema::create('user_information', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->string('phone')->nullable();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('company_name')->nullable();
             $table->string('address')->nullable();
-            $table->string('city')->nullable();
+            $table->string('address2')->nullable();
+            $table->string('city');
+            $table->string('country');
             $table->string('state_province')->nullable();
-            $table->string('country')->nullable();
+            $table->string('zip_postal_code');
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
 

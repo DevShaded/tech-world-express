@@ -14,11 +14,16 @@ class UserInformationFactory extends Factory
     public function definition(): array
     {
         return [
-            'phone' => $this->faker->phoneNumber(),
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'company_name' => $this->faker->company,
             'address' => $this->faker->address(),
+            'address2' => $this->faker->address(),
             'city' => $this->faker->city(),
-            'state_province' => $this->faker->city(),
             'country' => $this->faker->country(),
+            'state_province' => $this->faker->city(),
+            'zip_postal_code' => $this->faker->postcode,
+            'phone' => $this->faker->phoneNumber(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
