@@ -6,6 +6,7 @@ import { XMarkIcon as XMarkIconMini } from "@heroicons/vue/20/solid";
 import { Link } from "@inertiajs/vue3";
 import { Product } from "@/types/ProductType";
 import RandomProducts from "@/Components/RandomProducts.vue";
+import CartEmpty from "@/Components/CartEmpty.vue";
 
 const props = defineProps<{
     data: {
@@ -32,15 +33,9 @@ const contentList = computed(() => {
 
 <template>
     <DefaultLayout>
-        <main
+        <div
             class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8"
         >
-            <h1
-                class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
-            >
-                Shopping Cart
-            </h1>
-
             <div
                 v-if="contentList.length"
                 class="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16"
@@ -196,15 +191,13 @@ const contentList = computed(() => {
             </div>
 
             <div v-else>
-                <h2 class="text-lg font-medium text-gray-900 mt-4">
-                    Your cart is empty :(
-                </h2>
+                <CartEmpty />
 
                 <div class="mt-10">
                     <RandomProducts :products="data.randomProducts.data" />
                 </div>
             </div>
-        </main>
+        </div>
     </DefaultLayout>
 </template>
 

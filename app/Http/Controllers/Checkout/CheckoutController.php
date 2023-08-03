@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Checkout\CheckoutRequest;
 use App\Http\Services\Checkout\CheckoutService;
 use App\Http\Services\Product\Cart\CartService;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
 class CheckoutController extends Controller
@@ -27,6 +28,8 @@ class CheckoutController extends Controller
         $request = $request->validated();
 
         CheckoutService::store($request);
+
+        Session::flash('checkout_success', true);
 
         return redirect()->route('checkout.success');
     }

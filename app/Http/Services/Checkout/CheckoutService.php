@@ -29,9 +29,20 @@ class CheckoutService
     {
         UserInformation::updateOrCreate(
             [
-                'user_id' => $request['user_id']
+                'user_id' => $request['user_id'],
+                'first_name' => $request['first_name'],
+                'last_name' => $request['last_name'],
+                'company_name' => $request['company_name'],
+                'address' => $request['address'],
+                'address2' => $request['address2'],
+                'city' => $request['city'],
+                'country_id' => $request['country'],
+                'state_province' => $request['state_province'],
+                'zip_postal_code' => $request['zip_postal_code'],
+                'phone' => $request['phone'],
             ],
             [
+                'user_id' => $request['user_id'],
                 'first_name' => $request['first_name'],
                 'last_name' => $request['last_name'],
                 'company_name' => $request['company_name'],
