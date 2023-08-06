@@ -181,7 +181,7 @@ const contentList = computed(() => {
                     <div class="text-center">
                         <Link
                             class="mt-6 w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                            href="#"
+                            :href="route('checkout.index')"
                             type="submit"
                         >
                             Checkout
