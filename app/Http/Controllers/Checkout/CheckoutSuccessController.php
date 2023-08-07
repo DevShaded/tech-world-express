@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Checkout;
 
-use App\Enums\User\UserOrderStatusEnum;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\User\UserOrder;
+use App\Http\Services\User\UserService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,20 +11,15 @@ class CheckoutSuccessController extends Controller
 {
     public function __invoke(Request $request)
     {
-//        $checkoutSuccess = Session('checkout_success');
-//
-//        if (!$checkoutSuccess) {
-//            return redirect()->route('checkout.index');
-//        }
+        $checkoutSuccess = Session('checkout_success');
 
-        $user = User::with('userInformation', 'userInformation.country', 'userBilling', 'userShipping')
-            ->find(auth()->user()->id);
+        if (!$checkoutSuccess) {
+            return redirect()->route('checkout.index');
+        }
 
-        $order = UserOrder::with('userOrderItems', 'userOrderItems.product', 'userOrderItems.product.information', 'userOrderItems.product.information.category', 'userOrderItems.product.information.productInformationPicture')
-            ->where('user_id', auth()->user()->id)
-            ->where('status', UserOrderStatusEnum::Pending && UserOrderStatusEnum::Processing)
-            ->latest()
-            ->first();
+        $user = UserService::getUser(auth()->user()->id);
+
+        $order = UserService::getUserOrder(auth()->user()->id);
 
         return Inertia::render('Checkout/Success', [
             'data' => [
