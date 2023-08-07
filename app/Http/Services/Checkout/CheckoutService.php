@@ -58,6 +58,18 @@ class CheckoutService
             ]
         );
 
+        User\UserShipping::updateOrCreate(
+            [
+                'user_id' => $request['user_id']
+            ],
+            [
+                'shipping_address' => $request['address'],
+                'shipping_city' => $request['city'],
+                'shipping_state_province' => $request['state_province'],
+                'shipping_country' => $request['country'],
+            ]
+        );
+
         $cartPrice = CartService::getCartPrice();
 
         $userOrder = User\UserOrder::create([
