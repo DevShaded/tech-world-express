@@ -27,6 +27,19 @@ class UserService
         return $user;
     }
 
+    public static function getUserInformation(string $id)
+    {
+        $userInformation = Cache::get('userInformation:' . $id);
+
+        if (!$userInformation) {
+            $userInformation = UserInformation::with('user', 'country')
+                ->where('user_id', $id)
+                ->firstOrFail();
+
+            Cache::put('userInformation:' . $id, $userInformation, 3600);
+        }
+    }
+
     public static function getUserOrder(string $userId): UserOrder
     {
         $order = Cache::get('order:' . $userId);
@@ -46,6 +59,7 @@ class UserService
 
     public static function storeUserInformation(array $request): void
     {
+
         UserInformation::updateOrCreate(
             [
                 'user_id' => $request['user_id'],

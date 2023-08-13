@@ -20,12 +20,6 @@ class CheckoutService
         UserService::storeUserBilling($request);
         UserService::storeUserShipping($request);
 
-        $userCache = Cache::get('user:' . $request['user_id']);
-
-        if (!$userCache) {
-            Cache::delete('user:' . $request['user_id']);
-        }
-
         $cartPrice = CartService::getCartPrice();
 
         UserService::storeUserOrder($request, $cartPrice);
