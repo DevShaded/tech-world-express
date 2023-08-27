@@ -4,6 +4,7 @@ namespace App\Http\Services\User;
 
 use App\Enums\User\UserOrderStatusEnum;
 use App\Models\User;
+use App\Models\User\Country\Country;
 use App\Models\User\UserBilling;
 use App\Models\User\UserInformation;
 use App\Models\User\UserOrder;
@@ -32,12 +33,13 @@ class UserService
         $userInformation = Cache::get('userInformation:' . $id);
 
         if (!$userInformation) {
-            $userInformation = UserInformation::with('user', 'country')
-                ->where('user_id', $id)
-                ->firstOrFail();
+            $userInformation = User::with('userInformation', 'userInformation.country')
+                ->findOrFail($id);
 
             Cache::put('userInformation:' . $id, $userInformation, 3600);
         }
+
+        return $userInformation;
     }
 
     public static function getUserOrder(string $userId): UserOrder
@@ -60,6 +62,14 @@ class UserService
     public static function storeUserInformation(array $request): void
     {
 
+        // get country id from country name
+        $countryId = Cache::get('country:' . $request['country']);
+
+        if (!$countryId) {
+            $countryId = Country::where('name', $request['country'])->first()->id;
+            Cache::put('country:' . $request['country'], $countryId, 3600);
+        }
+
         UserInformation::updateOrCreate(
             [
                 'user_id' => $request['user_id'],
@@ -72,12 +82,14 @@ class UserService
                 'address' => $request['address'],
                 'address2' => $request['address2'],
                 'city' => $request['city'],
-                'country_id' => $request['country'],
+                'country_id' => $countryId,
                 'state_province' => $request['state_province'],
                 'zip_postal_code' => $request['zip_postal_code'],
                 'phone' => $request['phone'],
             ]
         );
+
+        Cache::forget('userInformation:' . $request['user_id']);
     }
 
     public static function storeUserBilling(array $request): void

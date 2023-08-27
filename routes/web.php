@@ -56,8 +56,8 @@ Route::middleware('auth')->group(function () {
             return Inertia::render('Dashboard');
         })->name('dashboard');
 
-        Route::prefix('user')->group(function () {
-
+        Route::prefix('/user')->group(function () {
+            Route::resource('/information', \App\Http\Controllers\Auth\Profile\Dashboard\User\Information\InformationController::class);
         });
     });
 });

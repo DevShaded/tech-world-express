@@ -22,7 +22,7 @@ class UserInformation extends Model
         'address',
         'address2',
         'city',
-        'country',
+        'country_id',
         'state_province',
         'zip_postal_code',
         'phone',
