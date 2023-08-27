@@ -38,7 +38,7 @@ const secondaryNavigation = [
                             <p class="mt-1 text-sm leading-6 text-gray-400">Use a permanent address where you can receive mail.</p>
                         </div>
 
-                      <UpdateUserInformationForm :data="data" />
+                        <UpdateUserInformationForm :data="data"/>
                     </div>
                 </div>
             </section>
