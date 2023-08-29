@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\Profile\Dashboard\User\Information\InformationController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Checkout\CheckoutController;
 use App\Http\Controllers\Checkout\CheckoutSuccessController;
@@ -57,7 +58,8 @@ Route::middleware('auth')->group(function () {
         })->name('dashboard');
 
         Route::prefix('/user')->group(function () {
-            Route::resource('/information', \App\Http\Controllers\Auth\Profile\Dashboard\User\Information\InformationController::class);
+            Route::resource('/information', InformationController::class)
+                ->except(['create', 'edit', 'update', 'show']);
         });
     });
 });
@@ -68,4 +70,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

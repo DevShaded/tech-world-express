@@ -5,6 +5,8 @@ import { useForm, usePage } from "@inertiajs/vue3";
 import { UserInformation } from "@/types/UserInformationType";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/Information/TextInput.vue";
 
 const props = defineProps<{
     data: UserInformation;
@@ -45,13 +47,13 @@ const submit = () => {
     <form class="md:col-span-2" @submit.prevent="submit">
         <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
             <div class="col-span-full">
-                <label for="name" class="block text-sm font-medium leading-6 text-white">Name</label>
+                <InputLabel for="name">Name</InputLabel>
+
                 <div class="mt-2">
                     <div
-                        class="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
-                        <input
+                        class="flex rounded-md ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+                        <TextInput
                             id="name" v-model="form.name" type="text" name="name" autocomplete="username"
-                            class="flex-1 border-0 bg-transparent py-1.5 text-white focus:ring-0 sm:text-sm sm:leading-6"
                             :placeholder="data.information.name"/>
                     </div>
 
@@ -63,11 +65,10 @@ const submit = () => {
             </div>
 
             <div class="col-span-full">
-                <label for="email" class="block text-sm font-medium leading-6 text-white">Email address</label>
+                <InputLabel for="email">Email address</InputLabel>
+
                 <div class="mt-2">
-                    <input
-                        id="email" v-model="form.email" name="email" type="email" autocomplete="email"
-                        class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"/>
+                    <TextInput id="email" v-model="form.email" name="email" type="email" autocomplete="email"/>
                 </div>
 
                 <InputError
@@ -77,12 +78,12 @@ const submit = () => {
             </div>
 
             <div class="sm:col-span-3">
-                <label for="first-name" class="block text-sm font-medium leading-6 text-white">First name</label>
+                <InputLabel for="first-name">First Name</InputLabel>
+
                 <div class="mt-2">
-                    <input
+                    <TextInput
                         id="first-name" v-model="form.first_name" type="text" name="first-name"
-                        autocomplete="given-name"
-                        class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"/>
+                        autocomplete="given-name"/>
                 </div>
 
                 <InputError
@@ -92,11 +93,16 @@ const submit = () => {
             </div>
 
             <div class="sm:col-span-3">
-                <label for="last-name" class="block text-sm font-medium leading-6 text-white">Last name</label>
+                <InputLabel for="last-name">Last name</InputLabel>
+
                 <div class="mt-2">
-                    <input
-                        id="last-name" v-model="form.last_name" type="text" name="last-name" autocomplete="family-name"
-                        class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"/>
+                    <TextInput
+                        id="last-name"
+                        v-model="form.last_name"
+                        type="text"
+                        name="last-name"
+                        autocomplete="family-name"
+                    />
                 </div>
 
                 <InputError
@@ -106,11 +112,12 @@ const submit = () => {
             </div>
 
             <div class="col-span-full">
-                <label for="company" class="block text-sm font-medium leading-6 text-white">Company</label>
+                <InputLabel for="company">Company</InputLabel>
+
                 <div class="mt-2">
-                    <input
-                        id="company" v-model="form.company_name" name="company" type="text" autocomplete="organization"
-                        class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"/>
+                    <TextInput
+                        id="company" v-model="form.company_name" name="company" type="text"
+                        autocomplete="organization"/>
                 </div>
 
                 <InputError
@@ -120,11 +127,11 @@ const submit = () => {
             </div>
 
             <div class="col-span-full">
-                <label for="address" class="block text-sm font-medium leading-6 text-white">Address</label>
+                <InputLabel for="address">Address</InputLabel>
+
                 <div class="mt-2">
-                    <input
-                        id="address" v-model="form.address" name="address" type="text" autocomplete="street-address"
-                        class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"/>
+                    <TextInput
+                        id="address" v-model="form.address" name="address" type="text" autocomplete="street-address"/>
                 </div>
 
                 <InputError
@@ -134,12 +141,13 @@ const submit = () => {
             </div>
 
             <div class="col-span-full">
-                <label for="address2" class="block text-sm font-medium leading-6 text-white">Apartment, suite,
-                    etc.</label>
+                <InputLabel for="address2">
+                    Apartment, suite, etc.
+                </InputLabel>
+
                 <div class="mt-2">
-                    <input
-                        id="address2" v-model="form.address2" name="address2" type="text" autocomplete="text"
-                        class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"/>
+                    <TextInput
+                        id="address2" v-model="form.address2" name="address2" type="text" autocomplete="text"/>
                 </div>
 
                 <InputError
@@ -149,11 +157,12 @@ const submit = () => {
             </div>
 
             <div class="sm:col-span-3">
-                <label for="city" class="block text-sm font-medium leading-6 text-white">City</label>
+                <InputLabel for="city">
+                    City
+                </InputLabel>
+
                 <div class="mt-2">
-                    <input
-                        id="city" v-model="form.city" type="text" name="city" autocomplete="address-level2"
-                        class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"/>
+                    <TextInput id="city" v-model="form.city" type="text" name="city" autocomplete="address-level2"/>
                 </div>
 
                 <InputError
@@ -163,7 +172,8 @@ const submit = () => {
             </div>
 
             <div class="sm:col-span-3">
-                <label for="last-name" class="block text-sm font-medium leading-6 text-white">Country</label>
+                <InputLabel for="last-name">Country</InputLabel>
+
                 <div class="mt-2">
                     <select
                         id="country"
@@ -188,12 +198,14 @@ const submit = () => {
             </div>
 
             <div class="sm:col-span-3">
-                <label for="region" class="block text-sm font-medium leading-6 text-white">Sate / Province</label>
+                <InputLabel for="region">
+                    Sate / Province
+                </InputLabel>
+
                 <div class="mt-2">
-                    <input
+                    <TextInput
                         id="region" v-model="form.state_province" type="text" name="region"
-                        autocomplete="address-level1"
-                        class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"/>
+                        autocomplete="address-level1"/>
                 </div>
 
                 <InputError
@@ -203,12 +215,14 @@ const submit = () => {
             </div>
 
             <div class="sm:col-span-3">
-                <label for="zip_postal_code" class="block text-sm font-medium leading-6 text-white">Postal code</label>
+                <InputLabel for="zip_postal_code">
+                    Postal code
+                </InputLabel>
+
                 <div class="mt-2">
-                    <input
+                    <TextInput
                         id="zip_postal_code" v-model="form.zip_postal_code" type="text" name="zip_postal_code"
-                        autocomplete="postal-code"
-                        class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"/>
+                        autocomplete="postal-code"/>
                 </div>
 
                 <InputError
@@ -218,11 +232,13 @@ const submit = () => {
             </div>
 
             <div class="col-span-full">
-                <label for="phone" class="block text-sm font-medium leading-6 text-white">Phone</label>
+                <InputLabel for="phone">
+                    Phone
+                </InputLabel>
+
                 <div class="mt-2">
-                    <input
-                        id="phone" v-model="form.phone" name="phone" type="text" autocomplete="tel"
-                        class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"/>
+                    <TextInput
+                        id="phone" v-model="form.phone" name="phone" type="text" autocomplete="tel"/>
                 </div>
 
                 <InputError
