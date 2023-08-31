@@ -33,7 +33,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route("information.store"), {
+    form.patch(route("information.update"), {
         preserveState: true,
         preserveScroll: true,
         onSuccess: () => {

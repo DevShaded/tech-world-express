@@ -52,6 +52,9 @@ class HandleInertiaRequests extends Middleware
                 'count' => Cart::content()->count(),
                 'content' => $cart,
             ],
+            'app' => [
+                'url' => config('app.url'),
+            ],
         ]);
     }
 }

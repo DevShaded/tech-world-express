@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { UserInformation } from "@/types/UserInformationType";
-import UpdateUserInformationForm from "./Partials/UpdateUserInformationForm.vue";
-import { Link, usePage } from "@inertiajs/vue3";
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import DeleteUserForm from './Partials/DeleteUserForm.vue';
+import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
+import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
+import { Head, Link, usePage } from '@inertiajs/vue3';
 import { computed, ComputedRef } from "vue";
 
 defineProps<{
-    data: UserInformation;
+    mustVerifyEmail?: boolean;
+    status?: string;
 }>();
 
 const page = usePage();
@@ -29,6 +31,8 @@ const secondaryNavigation = [
 </script>
 
 <template>
+    <Head title="Profile"/>
+
     <AuthenticatedLayout>
         <section class="max-w-7xl mx-auto">
             <header class="border-b border-white/5">
@@ -47,16 +51,23 @@ const secondaryNavigation = [
                 </nav>
             </header>
 
-            <!-- Settings forms -->
-            <div class="divide-y divide-white/5">
-                <div class="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
-                    <div>
-                        <h2 class="text-base font-semibold leading-7 text-white">Personal Information</h2>
-                        <p class="mt-1 text-sm leading-6 text-gray-400">Use a permanent address where you can receive
-                            mail.</p>
+            <div class="py-12">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                    <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                        <UpdateProfileInformationForm
+                            :must-verify-email="mustVerifyEmail"
+                            :status="status"
+                            class="max-w-xl"
+                        />
                     </div>
 
-                    <UpdateUserInformationForm :data="data"/>
+                    <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                        <UpdatePasswordForm class="max-w-xl"/>
+                    </div>
+
+                    <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                        <DeleteUserForm class="max-w-xl"/>
+                    </div>
                 </div>
             </div>
         </section>

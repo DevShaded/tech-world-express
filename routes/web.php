@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\Profile\Dashboard\User\Account\ProfileController;
 use App\Http\Controllers\Auth\Profile\Dashboard\User\Information\InformationController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Checkout\CheckoutController;
@@ -8,7 +9,6 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Product\Cart\CartController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\ReviewController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -58,16 +58,14 @@ Route::middleware('auth')->group(function () {
         })->name('dashboard');
 
         Route::prefix('/user')->group(function () {
-            Route::resource('/information', InformationController::class)
-                ->except(['create', 'edit', 'update', 'show']);
+            Route::get('/information', [InformationController::class, 'index'])->name('information.index');
+            Route::patch('/information', [InformationController::class, 'update'])->name('information.update');
+
+            Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+            Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+            Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         });
     });
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';
