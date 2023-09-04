@@ -41,16 +41,25 @@ const timestampToDate = (timestamp: string) => {
 </script>
 
 <template>
-    <div v-for="product in products" :key="product.id" class="border-b border-t border-gray-200 bg-white shadow-sm sm:rounded-lg sm:border">
+    <div
+        v-for="product in products" :key="product.id"
+        class="border-b border-t border-gray-200 bg-white shadow-sm sm:rounded-lg sm:border">
         <div class="px-4 py-6 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:p-8">
             <div class="sm:flex lg:col-span-7">
-                <div class="aspect-h-1 aspect-w-1 w-full flex-shrink-0 overflow-hidden rounded-lg sm:aspect-none sm:h-40 sm:w-40">
-                    <img :src="product.product.information.product_information_picture.image" :alt="product.product.name" class="h-full w-full object-cover object-center sm:h-full sm:w-full" />
+                <div
+                    class="aspect-h-1 aspect-w-1 w-full flex-shrink-0 overflow-hidden rounded-lg sm:aspect-none sm:h-40 sm:w-40">
+                    <img
+                        :src="product.product.information.product_information_picture.image"
+                        :alt="product.product.name"
+                        class="h-full w-full object-cover object-center sm:h-full sm:w-full"/>
                 </div>
 
                 <div class="mt-6 sm:ml-6 sm:mt-0">
                     <h3 class="text-base font-medium text-gray-900">
-                        <Link :href="route('product.show', { name: product.product.information.category.name, slug: product.product.slug })">{{ product.product.name }}</Link>
+                        <Link
+                            :href="route('product.show', { name: product.product.information.category.name, slug: product.product.slug })">
+                            {{ product.product.name }}
+                        </Link>
                     </h3>
                     <p class="mt-2 text-sm font-medium text-gray-900">${{ product.product.information.price }}</p>
                     <p class="mt-3 text-sm text-gray-500">{{ product.product.information.description }}</p>
@@ -62,9 +71,11 @@ const timestampToDate = (timestamp: string) => {
                     <div>
                         <dt class="font-medium text-gray-900">Delivery address</dt>
                         <dd class="mt-3 text-gray-500">
-                            <span class="block">{{ user.user_shipping.shipping_address }}</span>
-                            <span class="block">{{ user.user_shipping.shipping_city }}, {{ user.user_shipping.shipping_state_province }}</span>
-                            <span class="block">{{ user.user_shipping.shipping_country }}</span>
+                            <span class="block">{{ user.user_shipping?.shipping_address }}</span>
+                            <span class="block">{{
+                                    user.user_shipping?.shipping_city
+                                }}, {{ user.user_shipping?.shipping_state_province }}</span>
+                            <span class="block">{{ user.user_shipping?.shipping_country }}</span>
                         </dd>
                     </div>
                     <div>
@@ -85,7 +96,9 @@ const timestampToDate = (timestamp: string) => {
             </p>
             <div class="mt-6" aria-hidden="true">
                 <div class="overflow-hidden rounded-full bg-gray-200">
-                    <div class="h-2 rounded-full bg-indigo-600" :style="{ width: `calc((${step} * 2 + 1) / 8 * 100%)` }" />
+                    <div
+                        class="h-2 rounded-full bg-indigo-600"
+                        :style="{ width: `calc((${step} * 2 + 1) / 8 * 100%)` }"/>
                 </div>
                 <div class="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
                     <div :class="[step > 0 ? 'text-indigo-600' : '', 'text-center']">Pending</div>
