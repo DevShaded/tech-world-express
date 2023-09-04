@@ -61,8 +61,6 @@ class UserService
 
     public static function storeUserInformation(array $request): void
     {
-
-        // get country id from country name
         $countryId = Cache::get('country:' . $request['country']);
 
         if (!$countryId) {
@@ -94,7 +92,9 @@ class UserService
 
     public static function storeUserBilling(array $request): void
     {
-        UserBilling::updateOrCreate(
+        Cache::forget('billing:' . $request['user_id']);
+
+        $userBilling = UserBilling::updateOrCreate(
             [
                 'user_id' => $request['user_id']
             ],
@@ -105,10 +105,14 @@ class UserService
                 'card_cvv' => $request['card_cvv'],
             ]
         );
+
+        Cache::put('billing:' . $request['user_id'], $userBilling, 3600);
     }
 
     public static function storeUserShipping(array $request): void
     {
+        Cache::forget('user:' . $request['user_id']);
+
         User\UserShipping::updateOrCreate(
             [
                 'user_id' => $request['user_id']
