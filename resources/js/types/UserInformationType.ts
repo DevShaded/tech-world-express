@@ -2,6 +2,7 @@ export interface UserInformation {
     information: Information;
     countries?: (CountriesEntity)[] | null;
 }
+
 export interface Information {
     id: number;
     name: string;
@@ -11,23 +12,25 @@ export interface Information {
     updated_at: string;
     user_information: UserInformation1;
 }
+
 export interface UserInformation1 {
-    id: number;
-    user_id: number;
-    first_name: string;
-    last_name: string;
-    company_name: string;
-    address: string;
-    address2?: null;
-    city: string;
-    country_id?: null;
-    state_province: string;
-    zip_postal_code: string;
-    phone: string;
-    created_at: string;
-    updated_at: string;
+    id?: number;
+    user_id?: number;
+    first_name?: string;
+    last_name?: string;
+    company_name?: string;
+    address?: string;
+    address2?: string | null
+    city?: string;
+    country_id?: string | null;
+    state_province?: string;
+    zip_postal_code?: string;
+    phone?: string;
+    created_at?: string;
+    updated_at?: string;
     country?: CountriesEntity | null;
 }
+
 export interface CountriesEntity {
     id: number;
     name: string;
