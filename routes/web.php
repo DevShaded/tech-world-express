@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\Profile\Dashboard\User\Account\ProfileController;
+use App\Http\Controllers\Auth\Profile\Dashboard\User\Billing\BillingController;
 use App\Http\Controllers\Auth\Profile\Dashboard\User\Information\InformationController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Checkout\CheckoutController;
@@ -64,6 +65,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
             Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
             Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+            Route::get('/billing', [BillingController::class, 'index'])->name('billing.index');
+            Route::get('/billing/edit', [BillingController::class, 'edit'])->name('billing.edit');
+            Route::patch('/billing', [BillingController::class, 'update'])->name('billing.update');
+            Route::delete('/billing/{id}', [BillingController::class, 'destroy'])->name('billing.destroy');
         });
     });
 });
