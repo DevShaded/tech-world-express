@@ -21,7 +21,11 @@ const navigation = [
         href: route('billing.index'),
         current: (appUrl.value + page.url) === route('billing.index')
     },
-    {name: 'Orders', href: '#', current: false},
+    {
+        name: 'Orders',
+        href: route('orders.index'),
+        current: (appUrl.value + page.url) === route('orders.index')
+    },
 ];
 </script>
 

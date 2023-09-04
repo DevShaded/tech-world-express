@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\Profile\Dashboard\User\Account\ProfileController;
 use App\Http\Controllers\Auth\Profile\Dashboard\User\Billing\BillingController;
 use App\Http\Controllers\Auth\Profile\Dashboard\User\Information\InformationController;
+use App\Http\Controllers\Auth\Profile\Dashboard\User\Orders\OrdersController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Checkout\CheckoutController;
 use App\Http\Controllers\Checkout\CheckoutSuccessController;
@@ -70,6 +71,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/billing/edit', [BillingController::class, 'edit'])->name('billing.edit');
             Route::patch('/billing', [BillingController::class, 'update'])->name('billing.update');
             Route::delete('/billing/{id}', [BillingController::class, 'destroy'])->name('billing.destroy');
+
+            Route::get('/orders', [OrdersController::class, 'index'])->name('orders.index');
         });
     });
 });
