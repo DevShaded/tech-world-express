@@ -73,6 +73,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('/billing/{id}', [BillingController::class, 'destroy'])->name('billing.destroy');
 
             Route::get('/orders', [OrdersController::class, 'index'])->name('orders.index');
+            Route::get('/orders/{status}', [OrdersController::class, 'show'])->name('orders.show');
         });
     });
 });

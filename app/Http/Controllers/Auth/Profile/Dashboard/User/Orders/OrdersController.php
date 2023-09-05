@@ -23,4 +23,23 @@ class OrdersController extends Controller
             ],
         ]);
     }
+
+    public function show(string $status)
+    {
+        $status = match ($status) {
+            'pending' => 'pending',
+            'processing' => 'processing',
+            'shipped' => 'shipped',
+            'completed' => 'completed',
+            'cancelled' => 'cancelled',
+            default => 'all',
+        };
+
+        return Inertia::render('Profile/Dashboard/User/Orders/Show', [
+            'status' => $status,
+            'data' => [
+                'orders' => UserOrdersService::getUserOrderByStatus(auth()->user()->id, $status),
+            ],
+        ]);
+    }
 }

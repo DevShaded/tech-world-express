@@ -2,11 +2,24 @@
 
 namespace App\Http\Services\User\Order;
 
+use App\Enums\User\UserOrderStatusEnum;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 
 class UserOrdersService
 {
+    public static function getUserOrderByStatus(string $id, string $status)
+    {
+        return match ($status) {
+            'pending' => self::getPendingUserOrders($id),
+            'processing' => self::getProcessingUserOrders($id),
+            'shipped' => self::getShippedUserOrders($id),
+            'completed' => self::getCompletedUserOrders($id),
+            'cancelled' => self::getCancelledUserOrders($id),
+            default => self::getUserOrders($id),
+        };
+    }
+
     public static function getUserOrders(string $id)
     {
         $userOrders = Cache::get('userOrders:' . $id);
@@ -84,7 +97,7 @@ class UserOrdersService
             $userOrders = User::with('userOrders', 'userOrders.userOrderItems', 'userOrders.userOrderItems.product', 'userOrders.userOrderItems.product.information', 'userOrders.userOrderItems.product.information.category', 'userOrders.userOrderItems.product.information.productInformationPicture')
                 ->where('id', $id)
                 ->whereHas('userOrders', function ($query) {
-                    $query->where('status', 'completed');
+                    $query->where('status', '=', UserOrderStatusEnum::Completed);
                 })
                 ->get();
 
