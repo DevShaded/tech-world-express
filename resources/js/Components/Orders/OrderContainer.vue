@@ -23,7 +23,8 @@ defineProps<{
             <p class="ml-16 truncate text-sm font-medium text-gray-400">{{ entity }}</p>
         </div>
         <div class="ml-16 flex items-baseline pb-6 sm:pb-7">
-            <p class="text-2xl font-semibold text-gray-300">{{ userOrder.length }}
+            <p class="text-2xl font-semibold text-gray-300">
+                {{ userOrder[0]?.user_orders ? userOrder[0]?.user_orders.length : 0 }}
                 total orders</p>
             <div class="absolute bg-gray-800 inset-x-0 bottom-0 px-4 py-4 sm:px-6">
                 <div class="text-sm">
