@@ -28,9 +28,7 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
-        <Head title="Reset Password" />
-
+    <GuestLayout title="Reset Password">
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="email" value="Email" />

@@ -37,7 +37,7 @@ switch (props.status) {
 </script>
 
 <template>
-    <AuthenticatedLayout>
+    <AuthenticatedLayout :title="statusTitle">
         <NavigationComponent/>
 
         <section class="py-24">

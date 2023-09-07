@@ -10,7 +10,7 @@ defineProps<{
 </script>
 
 <template>
-    <AuthenticatedLayout>
+    <AuthenticatedLayout title="Information">
         <section class="max-w-7xl mx-auto">
             <NavigationLayout/>
 

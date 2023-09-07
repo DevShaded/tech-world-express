@@ -45,7 +45,7 @@ const incentives = [
 </script>
 
 <template>
-    <DefaultLayout>
+    <DefaultLayout title="Home" content="Your Go-To Tech Store for Global Express Delivery!" url="/">
         <!-- Hero -->
         <div class="flex flex-col border-b border-gray-200 lg:border-0">
             <div class="relative">

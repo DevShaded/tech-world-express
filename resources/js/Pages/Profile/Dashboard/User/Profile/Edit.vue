@@ -13,9 +13,7 @@ defineProps<{
 </script>
 
 <template>
-    <Head title="Profile"/>
-
-    <AuthenticatedLayout>
+    <AuthenticatedLayout title="Profile Information">
         <section class="max-w-7xl mx-auto">
             <NavigationComponent/>
 

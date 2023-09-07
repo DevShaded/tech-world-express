@@ -6,7 +6,7 @@ import UpdateCreditCardInformation
 </script>
 
 <template>
-    <AuthenticatedLayout>
+    <AuthenticatedLayout title="Edit Billing">
         <section class="max-w-7xl mx-auto">
             <NavigationLayout/>
 

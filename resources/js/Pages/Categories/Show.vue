@@ -2,6 +2,7 @@
 import DefaultLayout from "@/Layouts/DefaultLayout.vue";
 import { Category, Product } from "@/types/ProductType";
 import ProductList from "@/Components/ProductList.vue";
+import { usePage } from "@inertiajs/vue3";
 
 defineProps<{
     data: {
@@ -14,7 +15,7 @@ defineProps<{
 </script>
 
 <template>
-    <DefaultLayout>
+    <DefaultLayout :title="data.category.name" :content="'Products under ' + data.category.name + ' category'" :url="usePage().url">
         <div
             class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8"
         >

@@ -3,6 +3,7 @@ import DefaultLayout from "@/Layouts/DefaultLayout.vue";
 import { Data } from "@/types/CheckoutType";
 import Products from "@/Components/Checkout/Success/ProductsComponent.vue"
 import BillingComponent from "@/Components/Checkout/Success/BillingComponent.vue";
+import { usePage } from "@inertiajs/vue3";
 
 const props = defineProps<{
     data: Data;
@@ -41,7 +42,7 @@ const timestampToDate = (timestamp: string) => {
 </script>
 
 <template>
-    <DefaultLayout>
+    <DefaultLayout title="Success!" content="Your orders was successfully! Thank you" :url="usePage().url">
         <div class="mx-auto max-w-2xl pb-24 pt-8 sm:px-6 sm:pt-16 lg:max-w-7xl lg:px-8">
             <div class="space-y-2 px-4 sm:flex sm:items-baseline sm:justify-between sm:space-y-0 sm:px-0">
                 <div class="flex sm:items-baseline sm:space-x-4">

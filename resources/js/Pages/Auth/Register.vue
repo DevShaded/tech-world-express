@@ -23,9 +23,7 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
-        <Head title="Register" />
-
+    <GuestLayout title="Register">
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="name" value="Name" />

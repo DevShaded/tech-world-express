@@ -2,7 +2,7 @@
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot, } from "@headlessui/vue";
 import { Bars3Icon, ShoppingCartIcon, UserIcon, XMarkIcon, } from "@heroicons/vue/24/outline/index.js";
 import { computed, ComputedRef, ref } from "vue";
-import { Link, usePage } from "@inertiajs/vue3";
+import { Link, usePage, Head } from "@inertiajs/vue3";
 import FooterComponent from "@/Components/FooterComponent.vue";
 import { User } from "@/types";
 import ApplicationLogoDark from "@/Components/ApplicationLogoDark.vue";
@@ -13,6 +13,12 @@ interface CategoriesEntity {
     created_at: string;
     updated_at: string;
 }
+
+defineProps<{
+    title: string,
+    content: string,
+    url: string,
+}>();
 
 const user: ComputedRef<User> = computed((): User => {
     return usePage().props.auth.user;
@@ -41,9 +47,30 @@ const mobileMenuOpen = ref(false);
 const cartCount = computed(() => {
     return usePage().props.cart.count as number;
 });
+
+const appDomain = computed(() => {
+    return usePage().props.app.url as string;
+});
 </script>
 
 <template>
+    <Head>
+        <title>{{ title }} - Tech World Express</title>
+        <meta name="description" :content="content">
+
+        <meta property="og:url" :content="`${appDomain}${url}`">
+        <meta property="og:title" :content="`${title} - Tech World Express`">
+        <meta property="og:description" :content="content">
+        <meta property="og:image" content="/images/favicons/android-chrome-512x512.png">
+
+        <meta name="twitter:domain" :content="appDomain">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:url" :content="`${appDomain}${url}`">
+        <meta name="twitter:title" :content="`${title} - Tech World Express`">
+        <meta name="twitter:description" :content="content">
+        <meta name="twitter:image" content="/images/favicons/android-chrome-512x512.png">
+    </Head>
+
     <div class="bg-white min-h-screen">
         <TransitionRoot :show="mobileMenuOpen" as="template">
             <Dialog

@@ -3,7 +3,7 @@ import DefaultLayout from "@/Layouts/DefaultLayout.vue";
 import { computed } from "vue";
 import { Cart, CartType } from "@/types/CartType";
 import { XMarkIcon as XMarkIconMini } from "@heroicons/vue/20/solid";
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 import { Product } from "@/types/ProductType";
 import RandomProducts from "@/Components/RandomProducts.vue";
 import CartEmpty from "@/Components/CartEmpty.vue";
@@ -32,7 +32,7 @@ const contentList = computed(() => {
 </script>
 
 <template>
-    <DefaultLayout>
+    <DefaultLayout :title="contentList ? `${contentList.length} Items in cart` : 'Your Cart'" content="Your cart" :url="usePage().url">
         <div
             class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8"
         >

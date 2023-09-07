@@ -5,11 +5,15 @@ import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, Head } from "@inertiajs/vue3";
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { CreditCardIcon, InformationCircleIcon, UserIcon, } from '@heroicons/vue/24/outline'
 import { ShoppingCartIcon } from "@heroicons/vue/24/outline/index.js";
+
+defineProps<{
+    title: string;
+}>();
 
 const showingNavigationDropdown = ref(false);
 
@@ -42,6 +46,10 @@ const solutions = [
 </script>
 
 <template>
+    <Head>
+        <title>{{ title }} - Tech World Express</title>
+    </Head>
+
     <div>
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav
