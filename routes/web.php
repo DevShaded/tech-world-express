@@ -9,6 +9,7 @@ use App\Http\Controllers\Checkout\CheckoutController;
 use App\Http\Controllers\Checkout\CheckoutSuccessController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Product\Cart\CartController;
+use App\Http\Controllers\Product\Pay\PayController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\ReviewController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,8 @@ Route::resource('/cart', CartController::class)
     ->except(['create', 'update', 'edit', 'show'])
     ->names(['cart.index', 'cart.store', 'cart.update', 'cart.destroy'])
     ->middleware('auth');
+
+Route::post('/pay/{categoryName}/{slug}', PayController::class)->name('pay')->middleware('auth');
 
 Route::resource('/checkout', CheckoutController::class)
     ->except(['create', 'edit', 'update', 'show'])
