@@ -1,9 +1,5 @@
 <?php
 
-use App\Http\Controllers\Auth\Profile\Dashboard\User\Account\ProfileController;
-use App\Http\Controllers\Auth\Profile\Dashboard\User\Billing\BillingController;
-use App\Http\Controllers\Auth\Profile\Dashboard\User\Information\InformationController;
-use App\Http\Controllers\Auth\Profile\Dashboard\User\Orders\OrdersController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Checkout\CheckoutController;
 use App\Http\Controllers\Checkout\CheckoutSuccessController;
@@ -13,7 +9,6 @@ use App\Http\Controllers\Product\Pay\PayController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\ReviewController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
