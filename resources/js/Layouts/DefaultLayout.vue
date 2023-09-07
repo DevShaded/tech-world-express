@@ -1,20 +1,11 @@
 <script lang="ts" setup>
-import {
-    Dialog,
-    DialogPanel,
-    TransitionChild,
-    TransitionRoot,
-} from "@headlessui/vue";
-import {
-    Bars3Icon,
-    ShoppingCartIcon,
-    UserIcon,
-    XMarkIcon,
-} from "@heroicons/vue/24/outline/index.js";
+import { Dialog, DialogPanel, TransitionChild, TransitionRoot, } from "@headlessui/vue";
+import { Bars3Icon, ShoppingCartIcon, UserIcon, XMarkIcon, } from "@heroicons/vue/24/outline/index.js";
 import { computed, ComputedRef, ref } from "vue";
 import { Link, usePage } from "@inertiajs/vue3";
 import FooterComponent from "@/Components/FooterComponent.vue";
 import { User } from "@/types";
+import ApplicationLogoDark from "@/Components/ApplicationLogoDark.vue";
 
 interface CategoriesEntity {
     id: number;
@@ -33,8 +24,6 @@ const categories: ComputedRef<CategoriesEntity[] | null | unknown> = computed(
     },
 );
 
-const cart = computed(() => usePage().props.cart);
-
 // make first letter in category name uppercase
 const capitalize = (s: string): string => {
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -42,8 +31,8 @@ const capitalize = (s: string): string => {
 
 const navigation = {
     pages: [
-        { name: "Company", href: "#" },
-        { name: "Stores", href: "#" },
+        {name: "Company", href: "#"},
+        {name: "Stores", href: "#"},
     ],
 };
 
@@ -71,7 +60,7 @@ const cartCount = computed(() => {
                     leave-from="opacity-100"
                     leave-to="opacity-0"
                 >
-                    <div class="fixed inset-0 bg-black bg-opacity-25" />
+                    <div class="fixed inset-0 bg-black bg-opacity-25"/>
                 </TransitionChild>
 
                 <div class="fixed inset-0 z-40 flex">
@@ -183,7 +172,7 @@ const cartCount = computed(() => {
                                     <Link
                                         :href="route('login')"
                                         class="-m-2 block p-2 font-medium text-gray-900"
-                                        >Sign in
+                                    >Sign in
                                     </Link>
                                 </div>
                             </div>
@@ -207,7 +196,7 @@ const cartCount = computed(() => {
                                         class="-m-2 block p-2 font-medium text-gray-900"
                                         method="post"
                                         type="button"
-                                        >Sign out
+                                    >Sign out
                                     </Link>
                                 </div>
                             </div>
@@ -240,7 +229,7 @@ const cartCount = computed(() => {
                             <Link
                                 :href="route('login')"
                                 class="text-sm font-medium text-white hover:text-gray-100"
-                                >Sign in
+                            >Sign in
                             </Link>
                         </div>
                     </div>
@@ -269,7 +258,7 @@ const cartCount = computed(() => {
                                 class="text-sm font-medium text-white hover:text-gray-100"
                                 method="post"
                                 type="button"
-                                >Sign out
+                            >Sign out
                             </Link>
                         </div>
                     </div>
@@ -284,13 +273,9 @@ const cartCount = computed(() => {
                                 <div class="hidden lg:flex lg:items-center">
                                     <Link :href="route('index')">
                                         <span class="sr-only"
-                                            >Tech World Express</span
+                                        >Tech World Express</span
                                         >
-                                        <img
-                                            alt=""
-                                            class="h-8 w-auto"
-                                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                        />
+                                        <ApplicationLogoDark class="h-8 w-full"/>
                                     </Link>
                                 </div>
 
@@ -351,13 +336,9 @@ const cartCount = computed(() => {
                                 <!-- Logo (lg-) -->
                                 <Link :href="route('index')" class="lg:hidden">
                                     <span class="sr-only"
-                                        >Tech World Express</span
+                                    >Tech World Express</span
                                     >
-                                    <img
-                                        alt=""
-                                        class="h-8 w-auto"
-                                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                    />
+                                    <ApplicationLogoDark class="h-9 w-auto fill-current"/>
                                 </Link>
 
                                 <div
@@ -375,7 +356,7 @@ const cartCount = computed(() => {
                                                     class="-m-2 p-2 text-gray-400 hover:text-gray-500"
                                                 >
                                                     <span class="sr-only"
-                                                        >Account</span
+                                                    >Account</span
                                                     >
                                                     <UserIcon
                                                         aria-hidden="true"
@@ -405,10 +386,10 @@ const cartCount = computed(() => {
                                                 />
                                                 <span
                                                     class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800"
-                                                    >{{ cartCount }}</span
+                                                >{{ cartCount }}</span
                                                 >
                                                 <span class="sr-only"
-                                                    >items in cart, view
+                                                >items in cart, view
                                                     bag</span
                                                 >
                                             </Link>
@@ -426,7 +407,7 @@ const cartCount = computed(() => {
             <slot></slot>
         </main>
 
-        <FooterComponent />
+        <FooterComponent/>
     </div>
 </template>
 

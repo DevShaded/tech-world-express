@@ -6,8 +6,39 @@ import DropdownLink from "@/Components/DropdownLink.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import { Link } from "@inertiajs/vue3";
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
+import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+import { CreditCardIcon, InformationCircleIcon, UserIcon, } from '@heroicons/vue/24/outline'
+import { ShoppingCartIcon } from "@heroicons/vue/24/outline/index.js";
 
 const showingNavigationDropdown = ref(false);
+
+const solutions = [
+    {
+        name: 'Profile',
+        description: 'Update your account\'s profile information',
+        href: route('profile.edit'),
+        icon: UserIcon
+    },
+    {
+        name: 'Information',
+        description: 'Update your account\'s delivery information',
+        href: route('information.index'),
+        icon: InformationCircleIcon
+    },
+    {
+        name: 'Billing',
+        description: "Change or delete your current billing information",
+        href: route('billing.index'),
+        icon: CreditCardIcon
+    },
+    {
+        name: 'Orders',
+        description: 'View your current or past orders you have made',
+        href: route('orders.index'),
+        icon: ShoppingCartIcon
+    },
+]
 </script>
 
 <template>
@@ -24,7 +55,7 @@ const showingNavigationDropdown = ref(false);
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
                                     <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
+                                        class="block h-9 w-auto fill-current"
                                     />
                                 </Link>
                             </div>
@@ -39,6 +70,53 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Dashboard
                                 </NavLink>
+
+                                <div class="inline-flex items-center px-1">
+                                    <Popover class="relative">
+                                        <PopoverButton
+                                            class="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-100">
+                                            <span>User</span>
+                                            <ChevronDownIcon class="h-5 w-5" aria-hidden="true"/>
+                                        </PopoverButton>
+
+                                        <transition
+                                            enter-active-class="transition ease-out duration-200"
+                                            enter-from-class="opacity-0 translate-y-1"
+                                            enter-to-class="opacity-100 translate-y-0"
+                                            leave-active-class="transition ease-in duration-150"
+                                            leave-from-class="opacity-100 translate-y-0"
+                                            leave-to-class="opacity-0 translate-y-1">
+                                            <PopoverPanel
+                                                class="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
+                                                <div
+                                                    class="w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-gray-800 text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+                                                    <div class="p-4">
+                                                        <div
+                                                            v-for="item in solutions" :key="item.name"
+                                                            class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-600">
+                                                            <div
+                                                                class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-600 group-hover:bg-gray-800">
+                                                                <component
+                                                                    :is="item.icon"
+                                                                    class="h-6 w-6 text-gray-300 group-hover:text-indigo-600"
+                                                                    aria-hidden="true"/>
+                                                            </div>
+                                                            <div>
+                                                                <Link
+                                                                    :href="item.href"
+                                                                    class="font-semibold text-gray-300">
+                                                                    {{ item.name }}
+                                                                    <span class="absolute inset-0"/>
+                                                                </Link>
+                                                                <p class="mt-1 text-gray-400">{{ item.description }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </PopoverPanel>
+                                        </transition>
+                                    </Popover>
+                                </div>
                             </div>
                         </div>
 
@@ -146,6 +224,27 @@ const showingNavigationDropdown = ref(false);
                         >
                             Dashboard
                         </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            :active="route().current('information.index')"
+                            :href="route('information.index')"
+                        >
+                            Information
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            :active="route().current('billing.index')"
+                            :href="route('billing.index')"
+                        >
+                            Billing
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            :active="route().current('orders.index')"
+                            :href="route('orders.index')"
+                        >
+                            Your Orders
+                        </ResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -185,13 +284,13 @@ const showingNavigationDropdown = ref(false);
                 class="bg-white dark:bg-gray-800 shadow"
             >
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
+                    <slot name="header"/>
                 </div>
             </header>
 
             <!-- Page Content -->
             <main>
-                <slot />
+                <slot/>
             </main>
         </div>
     </div>
