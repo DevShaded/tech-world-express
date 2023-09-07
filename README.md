@@ -2,7 +2,7 @@
 
 ## About Tech World Express
 Tech World Express is an ecommerce website that sells tech products. Tech World Express includes a working cart system, a working checkout system. Tech World Express is built with Laravel, Vue.js (Inertia.js), and Tailwind CSS.
-Look at the [screenshots](https://github.com/DevShaded/squeaker/tree/main/docs/screenshots) section to see how the application looks like.
+Look at the [screenshots](https://github.com/DevShaded/tech-world-express/tree/main/docs/screenshots) section to see how the application looks like.
 
 <img src="./docs/screenshots/Home.png"/>
 
